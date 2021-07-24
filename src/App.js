@@ -5,28 +5,35 @@ import { calculateWinner } from './helper';
 import './styles/root.scss';
 
 const App = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [isNextX, setisNextX] = useState(false);
+  const [history, setHistory] = useState([
+    { board: Array(9).fill(null), isNextX: true },
+  ]);
 
-  const winner = calculateWinner(board);
+  const [currentMove, setCurrentMove] = useState(0);
+  const current = history[currentMove];
+
+  const winner = calculateWinner(current.board);
   const message = winner
     ? `Winner is ${winner}`
-    : `Next Player is ${isNextX ? 'X' : 'O'}`;
+    : `Next Player is ${current.isNextX ? 'X' : 'O'}`;
 
   const handleClick = position => {
-    if (board[position] || winner) {
+    if (current.board[position] || winner) {
       return;
     }
 
-    setBoard(prev => {
-      return prev.map((square, pos) => {
+    setHistory(prev => {
+      const last = prev[prev.length - 1];
+
+      const newBoard = last.board.map((square, pos) => {
         if (pos == position) {
-          return isNextX ? 'X' : 'O';
+          return last.isNextX ? 'X' : 'O';
         }
         return square;
       });
+      return prev.concat({ board: newBoard, isNextX: !last.isNextX });
     });
-    setisNextX(prev => !prev);
+    setCurrentMove(prev => prev + 1);
   };
 
   return (
@@ -34,7 +41,7 @@ const App = () => {
       <h1>Zero-Kanta</h1>
       <small>Created by Virender Singh</small>
       <h2>{message}</h2>
-      <Board board={board} handleClick={handleClick} />
+      <Board board={current.board} handleClick={handleClick} />
     </div>
   );
 };
