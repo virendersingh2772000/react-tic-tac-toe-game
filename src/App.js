@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Board from './components/Board';
+import History from './components/History';
 import { calculateWinner } from './helper';
 
 import './styles/root.scss';
@@ -36,12 +37,17 @@ const App = () => {
     setCurrentMove(prev => prev + 1);
   };
 
+  const moveTo = move => {
+    setCurrentMove(move);
+  };
+
   return (
     <div className="app">
       <h1>Zero-Kanta</h1>
       <small>Created by Virender Singh</small>
       <h2>{message}</h2>
       <Board board={current.board} handleClick={handleClick} />
+      <History history={history} moveTo={moveTo} currentMove={currentMove} />
     </div>
   );
 };
