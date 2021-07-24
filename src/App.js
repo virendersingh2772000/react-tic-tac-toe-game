@@ -1,8 +1,10 @@
-import React from "react";
+import React from 'react';
+import Board from './components/Board';
 
 export default () => (
   <>
-    <h1>Welcome to tic tac toe game</h1>
+    <h1>Zero-Kanta</h1>
     <p>Created by Virender Singh</p>
+    <Board />
   </>
 );
