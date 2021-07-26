@@ -17,7 +17,11 @@ const App = () => {
   const { winner, winningSquares } = calculateWinner(current.board);
 
   const handleClick = position => {
-    if (current.board[position] || winner) {
+    if (
+      current.board[position] ||
+      winner ||
+      history.length != currentMove + 1
+    ) {
       return;
     }
 
@@ -49,7 +53,7 @@ const App = () => {
       <h1>
         TIC <span className="text-green">TAC</span> TOE
       </h1>
-      <small>Created by Virender Singh</small>
+      <small className="name">Created by Virender Singh</small>
       <StatusMessage winner={winner} current={current} />
       <Board
         board={current.board}
