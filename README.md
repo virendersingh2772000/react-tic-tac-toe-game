@@ -1,6 +1,6 @@
 # React App - TIC TAC TOE GAME / ZERO-KANTA
 
-Check the web app on this link(https://zerokanta/surge.sh)
+Check the web app on this link(https://zerokanta.surge.sh)
 
 To run in your local system, download the code and run below command to start:
 
